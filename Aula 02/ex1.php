@@ -70,7 +70,7 @@
                 case "radio":
                     criarCheckBoxRadio($chave, $valor);
             }
-            echo "</div";
+            echo "</div>";
         }
         
         //Função para criar input's dos tipos text e number
@@ -113,30 +113,16 @@
 
         //Função para criar input's do tipo checkbox e radio
         function criarCheckBoxRadio($chave, $valor){
-            pularLinha();
-            foreach($valor["opcoes"] as $chaveOpcoes=>$valorOpcoes){
-                if(!(empty($valor["valor_padrao"]))){
-                    for($i = 0; $i < sizeof($valor["valor_padrao"]); $i++){
-                        $valorPadrao[$i] = $valor["valor_padrao"][$i];
-                    if($chaveOpcoes == $valorPadrao[$i]){
-                        echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' checked />";
-                        echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
-                        pularLinha();
-                    }
-                    else{
-                        echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' />";
-                        echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
-                        pularLinha();
-                    }
-                    }
+            foreach($valor['opcoes'] as $chaveOpcoes => $valorOpcoes) {
+                if($valor['tipo'] == "checkbox" && ($chaveOpcoes == "F" || $chaveOpcoes == "N")) {
+                    echo "<input type=".$valor['tipo']." id=".$chave.''.$chaveOpcoes." name=".$chave." value=".$chaveOpcoes." checked>";
                 }
                 else{
-                    echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' />";
-                    echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
-                    pularLinha();
+                    echo "<input type=".$valor['tipo']." id=".$chave.''.$chaveOpcoes." name=".$chave." value=".$chaveOpcoes.">";
                 }
+                    echo "<label for=".$chave.'_'.$chaveOpcoes.">".$valorOpcoes."</label>";
             }
-            }
+        };
 
         criarForm($formulario);
     ?>
