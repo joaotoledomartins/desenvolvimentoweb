@@ -115,11 +115,28 @@
         function criarCheckBoxRadio($chave, $valor){
             pularLinha();
             foreach($valor["opcoes"] as $chaveOpcoes=>$valorOpcoes){
-                echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' />";
-                echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
-                pularLinha();
+                if(!(empty($valor["valor_padrao"]))){
+                    for($i = 0; $i < sizeof($valor["valor_padrao"]); $i++){
+                        $valorPadrao[$i] = $valor["valor_padrao"][$i];
+                    if($chaveOpcoes == $valorPadrao[$i]){
+                        echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' checked />";
+                        echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
+                        pularLinha();
+                    }
+                    else{
+                        echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' />";
+                        echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
+                        pularLinha();
+                    }
+                    }
+                }
+                else{
+                    echo "<input type='" . $valor["tipo"]. "' id='" . $valor["nome"] . "_" . $chaveOpcoes . "' name='" . $valor["nome"] . "' value='" . $chaveOpcoes ."' />";
+                    echo "<label for='". $valor["nome"] . "_" . $chaveOpcoes . "'>" . $valorOpcoes . ":</label>";
+                    pularLinha();
+                }
             }
-        };
+            }
 
         criarForm($formulario);
     ?>
