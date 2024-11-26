@@ -126,7 +126,5 @@
 
         criarForm($formulario);
     ?>
-    <?php
-    ?>
 </body>
 </html>
